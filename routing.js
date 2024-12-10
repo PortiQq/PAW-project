@@ -1,6 +1,7 @@
 module.exports = function(app) {
 
     require('./movies.js')(app);
+    require('./shows.js')(app);
 
     app.get("/api",(req, res) =>{
 
