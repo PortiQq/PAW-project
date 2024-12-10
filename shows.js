@@ -39,12 +39,12 @@ module.exports = function(app) {
           }
     });
 
-    app.get('/shows/future', async (req, res) => {  //FIX: nieprawidłowy format daty?
+    app.get('/futureShows', async (req, res) => {
         try {
             const now = new Date().toISOString();
             const result = await db.query(`
                 SELECT * FROM cinema_schema.shows
-                WHERE date > to_timestamp($1, 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"')`, [now]
+                WHERE date > $1`, [now]
                 );
             if (result.rows.length === 0) {
                 return res.status(404).send({ error: 'No shows in database!' });
