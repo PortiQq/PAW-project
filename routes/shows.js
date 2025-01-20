@@ -9,7 +9,7 @@ module.exports = function(app) {
 
     app.get('/api/shows', async (req, res) => {
     try {
-        const result = await db.query('SELECT * FROM cinema_schema.shows');
+        const result = await db.query('SELECT s.id, s.date, s.movie_id, m.title FROM cinema_schema.shows s INNER JOIN cinema_schema.movies m ON s.movie_id=m.id ORDER BY s.date ASC');
         if (result.rows.length === 0) {
             return res.status(404).send({ error: 'No shows in database!' });
         }

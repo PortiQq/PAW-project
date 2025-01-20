@@ -20,8 +20,7 @@ module.exports = function(app) {
         try {
 
           const userId = req.user.id;
-            //TODO: rozszerzyć informacje o filmie
-            const result = await db.query('SELECT show_id FROM cinema_schema.reservations WHERE user_id = $1', [userId]);
+            const result = await db.query('SELECT r.show_id, s.date, m.title FROM cinema_schema.reservations r JOIN cinema_schema.shows s ON r.show_id=s.id JOIN cinema_schema.movies m ON s.movie_id=m.id WHERE user_id = $1', [userId]);
             if (result.rows.length === 0) {
                 return res.status(404).send({ error: 'You have no reservations!' });
             }

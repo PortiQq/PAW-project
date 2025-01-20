@@ -18,19 +18,26 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = '/user-panel'; 
     });
 
-    loginTile.addEventListener('click', () => {
-        // Check login status and redirect
-        const isLoggedIn = false; // Replace with actual login status check
-        if (isLoggedIn) {
-            // Perform logout action
-            alert('Wylogowano!');
-            loginTile.textContent = 'Zaloguj';
-        } else {
-            window.location.href = '/login'; // Replace with actual login page
-        }
-    });
+    //Przycisk zaloguj/wyloguj 
+    if (localStorage.getItem('token')) {
+        loginTile.textContent = 'Wyloguj';
+        loginTile.addEventListener('click', () => {
+            logout();
+        });
+    } else {
+        loginTile.textContent = 'Zaloguj';
+        loginTile.addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
+    }
 
-    // Dynamically update login/logout tile based on login status
-    const isLoggedIn = false; // Replace with actual login status
-    loginTile.textContent = isLoggedIn ? 'Wyloguj' : 'Zaloguj';
-});
+     if (userPanelTile) {
+         userPanelTile.addEventListener('click', () => {
+             if (localStorage.getItem('token')) {
+                 window.location.href = '/user-panel';
+             } else {
+                 window.location.href = '/login.html';
+             }
+         });
+     }
+})
