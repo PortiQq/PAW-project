@@ -3,11 +3,11 @@ const bodyParser = require("body-parser");
 
 module.exports = function(app) {
 
-app.get('/helloworld', (req, res) => {
+app.get('/api/helloworld', (req, res) => {
     res.send('Hello World!')
   })
   
-  app.get('/movies', async (req, res) => {
+  app.get('/api/movies', async (req, res) => {
       try {
         const result = await db.query('SELECT id, title FROM cinema_schema.movies');
         if (result.rows.length === 0) {
@@ -21,7 +21,7 @@ app.get('/helloworld', (req, res) => {
     });
 
 
-    app.get('/movies/:id', async (req,res) => {
+    app.get('/api/movies/:id', async (req,res) => {
         const id = req.params.id;
         try {
             const result = await db.query(`
@@ -42,7 +42,7 @@ app.get('/helloworld', (req, res) => {
 
 
     //TODO: sprawdzanie roli admina
-    app.post('/movies/add', bodyParser.json(), async (req,res) => {
+    app.post('/api/movies/add', bodyParser.json(), async (req,res) => {
         try{
     const {title, release_date, description, duration} = req.body;
 

@@ -3,7 +3,7 @@ const authToken = require('../middleware/authToken');
 
 module.exports = function(app) {
 
-    app.get('/reservations', async (req, res) => {
+    app.get('/api/reservations', async (req, res) => {
           try {
             const result = await db.query('SELECT show_id, user_id FROM cinema_schema.reservations');
             if (result.rows.length === 0) {
@@ -16,7 +16,7 @@ module.exports = function(app) {
           }
         });
 
-    app.get('/reservations/myreservations', authToken, async (req,res) =>{
+    app.get('/api/reservations/myreservations', authToken, async (req,res) =>{
         try {
 
           const userId = req.user.id;
@@ -32,7 +32,7 @@ module.exports = function(app) {
           }
     })
 
-    app.post('/reservations/reserve', authToken, async (req,res) => {
+    app.post('/api/reservations/reserve', authToken, async (req,res) => {
       try{
           const {show_id} = req.body;
           const user_id = req.user.id;

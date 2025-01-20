@@ -3,11 +3,11 @@ const bodyParser = require("body-parser");
 
 module.exports = function(app) {
 
-    app.get('/show', async (req, res) => {
+    app.get('/api/show', async (req, res) => {
         res.send('Show must go on!')
       })
 
-    app.get('/shows', async (req, res) => {
+    app.get('/api/shows', async (req, res) => {
     try {
         const result = await db.query('SELECT * FROM cinema_schema.shows');
         if (result.rows.length === 0) {
@@ -20,7 +20,7 @@ module.exports = function(app) {
     }
     });
 
-    app.get('/shows/:id', async (req,res) => {
+    app.get('/api/shows/:id', async (req,res) => {
         const id = req.params.id;
         try {   //TODO: rozszerzyć kwerendę o dane filmu
             const result = await db.query(`
@@ -39,7 +39,7 @@ module.exports = function(app) {
           }
     });
 
-    app.get('/futureshows', async (req, res) => {
+    app.get('/api/futureshows', async (req, res) => {
         try {
             const now = new Date().toISOString();
             const result = await db.query(`
@@ -57,7 +57,7 @@ module.exports = function(app) {
         });
     
 
-    app.post('/shows/add', bodyParser.json(), async (req,res) => {
+    app.post('/api/shows/add', bodyParser.json(), async (req,res) => {
     
         try{
         const {movie_id, date} = req.body;

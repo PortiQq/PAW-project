@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logowanie</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="top-panel">
+            <div class="tile" id="movies-tile">Filmy</div>
+            <div class="tile" id="shows-tile">Seanse</div>
+            <div class="tile" id="user-panel-tile">Panel użytkownika</div>
+            <div class="tile" id="login-tile">Zaloguj</div>
+        </div>
+        <div class="header-panel"> 
+            <div class="header-tile" id="header-tile">Panel logowania</div>
+        </div>
+    </header>
+    <main>
+        <section id="content">
+            <div class="form-container">
+                <h1>Zaloguj się</h1>
+                <form id="login-form">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Wpisz swój email" required>
+                    
+                    <label for="password">Hasło</label>
+                    <input type="password" id="password" name="password" placeholder="Wpisz swoje hasło" required>
+                    
+                    <button type="submit" class="btn">Zaloguj</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <script src="/js/app.js"></script>
+    <script src="/js/auth.js"></script>
+</body>
+</html>

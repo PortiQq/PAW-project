@@ -7,7 +7,7 @@ const SECRET_KEY = 'PAWkino';
 
 module.exports = function(app) {
 
-    app.post('/auth/register', async (req,res) =>{
+    app.post('/api/auth/register', async (req,res) =>{
         const { username, email, password } = req.body;
 
         try {
@@ -31,7 +31,7 @@ module.exports = function(app) {
     })
 
 
-    app.post('/auth/login', async (req, res) => {
+    app.post('/api/auth/login', async (req, res) => {
         const { email, password } = req.body;
       
         try {
@@ -46,11 +46,9 @@ module.exports = function(app) {
             return res.status(401).send({ error: 'Invalid email or password.' });
           }
       
-          // Generowanie tokena JWT
           const token = jwt.sign({ id: user.id, username: user.name, email: user.email }, SECRET_KEY, { expiresIn: '48h' });
       
-          // Opcjonalnie: przechowywanie tokena w ciasteczku
-          res.cookie('token', token, { httpOnly: true });
+          res.cookie('token', token, { httpOnly: true }); //ciasteczko
       
           res.json({ message: 'Logged in successfully', token });
         } catch (err) {
@@ -59,13 +57,14 @@ module.exports = function(app) {
         }
       });
 
-      app.post('/auth/logout', (req, res) => {
+      
+      app.post('/api/auth/logout', (req, res) => {
         res.clearCookie('token');
         res.send({ message: 'Logged out successfully' });
       });
 
-      
-      app.get('/protected', authToken, (req, res) => {
+
+      app.get('/api/protected', authToken, (req, res) => {
         res.send({ message: 'Welcome to the protected route!', user: req.user });
       });
 }
