@@ -1,4 +1,4 @@
-const db = require('./db.js');
+const db = require('../db.js');
 const bodyParser = require("body-parser");
 
 module.exports = function(app) {

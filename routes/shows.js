@@ -1,9 +1,9 @@
-const db = require('./db.js');
+const db = require('../db.js');
 const bodyParser = require("body-parser");
 
 module.exports = function(app) {
 
-    app.get('/show', (req, res) => {
+    app.get('/show', async (req, res) => {
         res.send('Show must go on!')
       })
 
@@ -39,7 +39,7 @@ module.exports = function(app) {
           }
     });
 
-    app.get('/futureShows', async (req, res) => {
+    app.get('/futureshows', async (req, res) => {
         try {
             const now = new Date().toISOString();
             const result = await db.query(`
@@ -77,28 +77,6 @@ module.exports = function(app) {
             console.error(err);
             res.status(500).send({ error: 'Internal Server Error' });
         }
-    });
-
-    app.post('/shows/reserve', bodyParser.json(), async (req,res) => {
-        try{
-            const {show_id, user_id} = req.body;
-            const now = Date.now(); //TODO: sprawdzanie daty
-
-            if (!user_id || !show_id) {
-                return res.status(400).send({ error: 'show_id, user_id are required fields' });
-            }
-
-            const result = await db.query(
-                `INSERT INTO cinema_schema.reservations (show_id, user_id)
-                VALUES ($1, $2) RETURNING *`,
-                [show_id, user_id]
-            );
-            res.status(201).send(result.rows[0]);
-    
-            } catch (err) {
-                console.error(err);
-                res.status(500).send({ error: 'Internal Server Error' });
-            }
     });
 
 }
