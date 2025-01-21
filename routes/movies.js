@@ -9,7 +9,7 @@ app.get('/api/helloworld', (req, res) => {
   
   app.get('/api/movies', async (req, res) => {
       try {
-        const result = await db.query('SELECT id, title FROM cinema_schema.movies');
+        const result = await db.query('SELECT * FROM cinema_schema.movies');
         if (result.rows.length === 0) {
             return res.status(404).send({ error: 'No movies in database!' });
         }

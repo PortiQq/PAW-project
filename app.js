@@ -19,6 +19,9 @@ app.get('/shows', (req, res) => {
 app.get('/user-panel', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/user-panel.html'));
 });
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/admin.html'));
+});
 
 app.use((req, res) =>{
   res.status(404);
