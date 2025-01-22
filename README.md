@@ -39,6 +39,7 @@ npm start
 Aplikacja będzie dostępna pod adresem http://localhost:3000
 
 ## Struktura projektu
+```
 PAW-project/
 │
 │── app.js                # Główna aplikacja Express.js
@@ -69,10 +70,12 @@ PAW-project/
 |     ├── user.js          # Funkcjonalności panelu użytkownika
 |── package-lock.json      # Plik package-lock
 |── package.json           # Plik zależności
+```
 
 ## Endpointy backendowe
 
 # Związane z użytkownikiem
+```
 /api/movies                      # Wyświetla listę filmów
 /api/movies/:id                  # Wyświetla szczegóły filmu    
 /api/futureshows/                # Wyświetla dostępne przyszłe seanse
@@ -81,17 +84,20 @@ PAW-project/
 /api/auth/register               # Rejestruje nowego użytkownika
 /api/auth/login                  # Logowanie użytkownika
 /api/auth/logout                 # Wylogowanie użytkownika  
-  
+```
+
 # Związane z administratorem
+```
 /api/movies/add                  # Dodaje film
 /api/shows/add                   # Dodaje seans
 /api/reservations                # Wyświetla listę rezerwacji
 /api/shows                       # Wyświetla listę seansów
+```
 
 
 ## Baza danych
 
-# Należy utworzyć bazę danych PostgreSQL ze schematem cinema_schema
+Należy utworzyć bazę danych PostgreSQL ze schematem cinema_schema
 
 ```SQL
 –-tabela users
