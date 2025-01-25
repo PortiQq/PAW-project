@@ -4,6 +4,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const moviesList = document.getElementById('movies-list');
     const movieSelect = document.getElementById('movie_id');
 
+    //Autoryzacja admina
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = '/login';
+        return;
+    }
+
+    fetch('/admin', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            window.location.href = '/login';
+        }
+    })
+    .catch(error => {
+        console.error('Error checking access:', error);
+        window.location.href = '/login';
+    });
+
+
     //Pobranie listy filmów
     fetch('/api/movies')
         .then(response => response.json())

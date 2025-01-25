@@ -1,5 +1,8 @@
 const express = require('express')
-const path = require('path')
+const path = require('path');
+const authToken = require('./middleware/authToken.js');
+const authAdmin = require('./middleware/authAdmin.js');
+
 const app = express()
 const port = 3000
 
@@ -13,13 +16,16 @@ app.get('/movies', (req, res) => {
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/login.html'));
 });
+app.get('/register', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/register.html'));
+});
 app.get('/shows', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/shows.html'));
 });
 app.get('/user-panel', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/user-panel.html'));
 });
-app.get('/admin', (req, res) => {
+app.get('/admin', authToken, authAdmin, (req, res) => {
   res.sendFile(path.join(__dirname, '/public/admin.html'));
 });
 

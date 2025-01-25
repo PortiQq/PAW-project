@@ -1,3 +1,9 @@
+function decodeToken(token) {
+    const payload = token.split('.')[1];
+    const decodedPayload = atob(payload);
+    return JSON.parse(decodedPayload);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     
     const loginForm = document.getElementById('login-form');
@@ -43,7 +49,17 @@ async function login(email, password) {
         const data = await response.json();
         if (response.ok) {
             localStorage.setItem('token', data.token); 
-            window.location.href = '/user-panel';
+
+            //Sprawdzenie czy użytkownik jest adminem
+            const decodedToken = decodeToken(data.token);
+            const userRole = decodedToken.role;
+
+            if(userRole === true){
+                window.location.href = '/admin.html';
+            } else{
+                window.location.href = '/user-panel';
+            }
+            
         } else {
             alert(data.error || 'Błąd logowania');
         }

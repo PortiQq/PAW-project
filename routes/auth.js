@@ -46,7 +46,7 @@ module.exports = function(app) {
             return res.status(401).send({ error: 'Invalid email or password.' });
           }
       
-          const token = jwt.sign({ id: user.id, username: user.name, email: user.email }, SECRET_KEY, { expiresIn: '48h' });
+          const token = jwt.sign({ id: user.id, username: user.name, email: user.email, role: user.role }, SECRET_KEY, { expiresIn: '48h' });
       
           res.cookie('token', token, { httpOnly: true }); //ciasteczko
       
