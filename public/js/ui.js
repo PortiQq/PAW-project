@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         loginTile.textContent = 'Zaloguj';
         loginTile.addEventListener('click', () => {
-            window.location.href = 'login.html';
+            window.location.href = 'login';
         });
     }
 
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
              if (localStorage.getItem('token')) {
                  window.location.href = '/user-panel';
              } else {
-                 window.location.href = '/login.html';
+                 window.location.href = '/login';
              }
          });
      }

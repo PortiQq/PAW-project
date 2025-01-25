@@ -13,7 +13,16 @@ app.get('/api/helloworld', (req, res) => {
         if (result.rows.length === 0) {
             return res.status(404).send({ error: 'No movies in database!' });
         }
-        res.json(result.rows);
+
+        const movies = result.rows.map(movie => {
+            return {
+                ...movie,
+                release_date: movie.release_date.toISOString().split('T')[0]
+            };
+        });
+
+
+        res.json(movies);
       } catch (err) {
         console.error(err);
         res.status(500).send('Internal Server Error');
@@ -32,8 +41,11 @@ app.get('/api/helloworld', (req, res) => {
             if (result.rows.length === 0) {
                 return res.status(404).send({ error: 'Movie not found' });
             }
-
-            res.json(result.rows[0]);
+            
+            const movie = result.rows[0];
+            movie.release_date = movie.release_date.toISOString().split('T')[0]; // Usuwamy godzinę
+    
+            res.json(movie);
           } catch (err) {
             console.error(err);
             res.status(500).send('Internal Server Error');

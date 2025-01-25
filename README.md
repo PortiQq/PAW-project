@@ -26,7 +26,9 @@ git clone https://github.com/PortiQq/PAW-project.git
 
 2. **Zainstaluj zależności**
 
+```bash
 npm install 
+```
 
 3. **Skonfiguruj bazę danych**
 
@@ -72,9 +74,9 @@ PAW-project/
 |── package.json           # Plik zależności
 ```
 
-## Endpointy backendowe
+# Endpointy backendowe
 
-# Związane z użytkownikiem
+## Związane z użytkownikiem
 ```
 /api/movies                      # Wyświetla listę filmów
 /api/movies/:id                  # Wyświetla szczegóły filmu    
@@ -86,7 +88,7 @@ PAW-project/
 /api/auth/logout                 # Wylogowanie użytkownika  
 ```
 
-# Związane z administratorem
+## Związane z administratorem
 ```
 /api/movies/add                  # Dodaje film
 /api/shows/add                   # Dodaje seans
